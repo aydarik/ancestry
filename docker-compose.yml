@@ -1,0 +1,86 @@
+version: '2.4'
+services:
+  config:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    image: aydarik/ancestry-config
+    restart: on-failure
+
+  registry:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    image: aydarik/ancestry-registry
+    restart: on-failure
+    depends_on:
+      config:
+        condition: service_healthy
+    ports:
+      - 8761:3000
+
+  gateway:
+    environment:
+      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+    image: aydarik/ancestry-gateway
+    restart: on-failure
+    depends_on:
+      config:
+        condition: service_healthy
+      registry:
+        condition: service_started
+    ports:
+      - 80:4000
+
+#  auth-service:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
+#      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
+#    image: aydarik/ancestry-auth-service
+#    restart: on-failure
+#    depends_on:
+#      config:
+#        condition: service_healthy
+
+#  auth-postgresql:
+#    environment:
+#      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
+#    image: aydarik/ancestry-postgresql
+#    restart: on-failure
+#    depends_on:
+#      config:
+#        condition: service_healthy
+
+#  account-service:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#      ACCOUNT_SERVICE_PASSWORD: $ACCOUNT_SERVICE_PASSWORD
+#      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
+#    image: aydarik/ancestry-account-service
+#    restart: on-failure
+#    depends_on:
+#      config:
+#        condition: service_healthy
+
+#  account-postgresql:
+#    environment:
+#      INIT_DUMP: account-service-dump.js
+#      POSTGRESQL_PASSWORD: $POSTGRESQL_PASSWORD
+#    image: aydarik/ancestry-postgresql
+#    restart: on-failure
+#    depends_on:
+#      config:
+#        condition: service_healthy
+##    volumes:
+##      - R:\account-service\database:/database:rw
+
+#  monitoring:
+#    environment:
+#      CONFIG_SERVICE_PASSWORD: $CONFIG_SERVICE_PASSWORD
+#    image: aydarik/ancestry-monitoring
+#    restart: on-failure
+#    depends_on:
+#      config:
+#        condition: service_healthy
+#    ports:
+#      - 9000:8080
+#      - 8989:8989

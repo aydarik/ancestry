@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ancestry</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!--<script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>-->
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+
+    <script type="text/javascript">
+		function init() {
+			getCurrentAccount();
+		}
+    </script>
+</head>
+
+<body onload="init()">
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-5">
+            <div class="page-header">
+                <h1>Ancestry</h1>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Authorization</div>
+                <div class="panel-body">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="user">User:</label>
+                            <div class="col-sm-10">
+                                <p id="user" class="form-control-static"><i>Not logged in</i></p>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form class="form-inline">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="user_login" type="text" class="form-control" name="login" placeholder="Login"
+                                   value="test-1">
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input id="user_password" type="text" class="form-control" name="password"
+                                   placeholder="Password" value="password">
+                        </div>
+                    </form>
+
+                    <form class="form-inline padding-top">
+                        <button type="button" class="btn btn-success" onclick="addUser()">Add user</button>
+                        <button type="button" class="btn btn-danger" onclick="dropUser()">Drop user</button>
+                        <button type="button" class="btn btn-info" onclick="login()">Login</button>
+                        <button type="button" class="btn btn-warning" onclick="logout()">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="messages" class="col-sm-7 sidenav padding-top"></div>
+    </div>
+</div>
+</body>
+</html>

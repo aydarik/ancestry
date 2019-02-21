@@ -1,0 +1,43 @@
+version: '2.4'
+services:
+  config:
+    build: config
+    ports:
+      - 8000:8000
+
+  registry:
+    build: registry
+
+  gateway:
+    build: gateway
+
+#  auth-service:
+#    build: auth-service
+#    ports:
+#      - 5000:5000
+
+#  auth-postgresql:
+#    build:
+#      context: postgresql
+#      args:
+#        - HTTP_PROXY=$HTTP_PROXY
+#        - HTTPS_PROXY=$HTTPS_PROXY
+#    ports:
+#      - 25000:27017
+
+#  account-service:
+#    build: account-service
+#    ports:
+#      - 6000:6000
+
+#  account-postgresql:
+#    build:
+#      context: postgresql
+#      args:
+#        - HTTP_PROXY=$HTTP_PROXY
+#        - HTTPS_PROXY=$HTTPS_PROXY
+#    ports:
+#      - 26000:27017
+
+#  monitoring:
+#    build: monitoring

@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: registry
+  cloud:
+    config:
+      uri: http://config:8000
+      fail-fast: true
+      password: ${CONFIG_SERVICE_PASSWORD}
+      username: user
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    renewalPercentThreshold: 0.3

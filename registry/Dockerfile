@@ -1,4 +1,4 @@
-FROM java:8-jre
+FROM openjdk:11-jre-slim
 MAINTAINER Aydar Gumerbaev <aydar@gumerbaev.ru>
 
 ADD ./target/registry.jar /app/

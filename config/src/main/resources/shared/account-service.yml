@@ -1,21 +1,17 @@
-security:
-  oauth2:
-    client:
-      clientId: account-service
-      clientSecret: ${ACCOUNT_SERVICE_PASSWORD}
-      accessTokenUri: http://auth-service:5000/uaa/oauth/token
-      grant-type: client_credentials
-      scope: server
-
 spring:
-  data:
-    postgresql:
-      host: account-postgresql
-      username: user
-      password: ${POSTGRESQL_PASSWORD}
-      database: ancestry
-      port: 5432
+  datasource:
+#    url: jdbc:postgresql://account-postgresql:5432/ancestry
+    url: jdbc:postgresql://localhost:26000/ancestry
+    username: user
+    password: ${POSTGRESQL_PASSWORD}
+#    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: update
+        jdbc.lob.non_contextual_creation: true
 
 server:
-  context-path: /accounts
+  context-path: /users
   port: 6000

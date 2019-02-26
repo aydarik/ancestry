@@ -5,14 +5,8 @@ zuul:
     socket-timeout-millis: 20000
 
   routes:
-    auth-service:
-        path: /uaa/**
-        url: http://auth-service:5000
-        stripPrefix: false
-        sensitiveHeaders:
-
     account-service:
-        path: /accounts/**
+        path: /users/**
         serviceId: account-service
         stripPrefix: false
         sensitiveHeaders:

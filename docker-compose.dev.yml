@@ -11,33 +11,14 @@ services:
   gateway:
     build: gateway
 
-#  auth-service:
-#    build: auth-service
-#    ports:
-#      - 5000:5000
+  account-service:
+    build: account-service
+    ports:
+      - 6000:6000
 
-#  auth-postgresql:
-#    build:
-#      context: postgresql
-#      args:
-#        - HTTP_PROXY=$HTTP_PROXY
-#        - HTTPS_PROXY=$HTTPS_PROXY
-#    ports:
-#      - 25000:27017
-
-#  account-service:
-#    build: account-service
-#    ports:
-#      - 6000:6000
-
-#  account-postgresql:
-#    build:
-#      context: postgresql
-#      args:
-#        - HTTP_PROXY=$HTTP_PROXY
-#        - HTTPS_PROXY=$HTTPS_PROXY
-#    ports:
-#      - 26000:27017
+  account-postgresql:
+    ports:
+      - 26000:5432
 
 #  monitoring:
 #    build: monitoring

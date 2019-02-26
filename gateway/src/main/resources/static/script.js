@@ -7,10 +7,12 @@ function addUser() {
 	var password = document.getElementById('user_password').value;
 
 	$.ajax({
-		url: 'accounts/',
+		url: 'users/signup',
 		datatype: 'json',
 		type: "POST",
 		async: false,
+		headers: {'Authorization': 'Basic YnJvd3Nlcjo='},
+		// headers: {'Authorization': 'Basic ' + btoa("browser:")},
 		contentType: "application/json",
 		data: JSON.stringify({
 			username: username,
@@ -30,7 +32,7 @@ function dropUser() {
 
 	if (token) {
 		$.ajax({
-			url: 'accounts/current',
+			url: 'users/current',
 			datatype: 'json',
 			type: 'DELETE',
 			headers: {'Authorization': 'Bearer ' + token},
@@ -53,7 +55,7 @@ function login() {
 	var password = document.getElementById('user_password').value;
 
 	$.ajax({
-		url: 'uaa/oauth/token',
+		url: 'users/oauth/token',
 		datatype: 'json',
 		type: 'POST',
 		async: false,
@@ -81,7 +83,7 @@ function getCurrentAccount() {
 
 	if (token) {
 		$.ajax({
-			url: 'accounts/current',
+			url: 'users/current',
 			datatype: 'json',
 			type: 'GET',
 			headers: {'Authorization': 'Bearer ' + token},

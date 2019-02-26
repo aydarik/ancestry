@@ -3,7 +3,8 @@ spring:
     name: registry
   cloud:
     config:
-      uri: http://config:8000
+#      uri: http://config:8000
+      uri: http://localhost:8000
       fail-fast: true
       password: ${CONFIG_SERVICE_PASSWORD}
       username: user

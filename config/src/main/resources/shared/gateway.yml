@@ -8,7 +8,7 @@ zuul:
     account-service:
         path: /users/**
         serviceId: account-service
-        stripPrefix: false
+        stripPrefix: true
         sensitiveHeaders:
 
 server:

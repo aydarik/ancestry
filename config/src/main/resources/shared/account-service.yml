@@ -6,12 +6,13 @@ spring:
     password: ${POSTGRESQL_PASSWORD}
 #    driver-class-name: org.postgresql.Driver
   jpa:
+    generate-ddl: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        ddl-auto: update
+        ddl-auto: create
         jdbc.lob.non_contextual_creation: true
 
 server:
-  context-path: /users
+#  context-path: /users
   port: 6000

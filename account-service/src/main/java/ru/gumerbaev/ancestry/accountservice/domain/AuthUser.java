@@ -9,12 +9,20 @@ import java.util.Collection;
 import java.util.Date;
 
 @Entity
-public class User implements UserDetails {
+public class AuthUser implements UserDetails {
 
 	@Id
 	private String username;
 	private String password;
 	private Date lastSeen;
+
+	public AuthUser() {
+	}
+
+	public AuthUser(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 
 	public String getUsername() {
 		return username;
@@ -47,27 +55,27 @@ public class User implements UserDetails {
 
 	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return false;
+		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User{" +
+		return "AuthUser{" +
 				"username='" + username + '\'' +
 				", lastSeen=" + lastSeen +
 				'}';

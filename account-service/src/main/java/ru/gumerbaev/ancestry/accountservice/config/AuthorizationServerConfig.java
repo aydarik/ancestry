@@ -16,36 +16,27 @@ import ru.gumerbaev.ancestry.accountservice.service.security.AncestryUserDetails
 
 @Configuration
 @EnableAuthorizationServer
-public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdapter {
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private TokenStore tokenStore = new InMemoryTokenStore();
 
     private final AuthenticationManager authenticationManager;
     private final AncestryUserDetailsService userDetailsService;
-//    private final Environment env;
 
     @Autowired
-    public OAuth2AuthorizationConfig(@Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager,
-                                     AncestryUserDetailsService userDetailsService/*,
-                                     Environment env*/) {
+    public AuthorizationServerConfig(@Qualifier("authenticationManagerBean") AuthenticationManager authenticationManager,
+                                     AncestryUserDetailsService userDetailsService) {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
-//        this.env = env;
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        // TODO: persist clients details
         clients.inMemory()
                 .withClient("browser")
-                .authorizedGrantTypes("refresh_token", "password")
-                .autoApprove(true)
-                .scopes("ui");
-//                .and()
-//                .withClient("statistics-service")
-//                .secret(env.getProperty("STATISTICS_SERVICE_PASSWORD"))
-//                .authorizedGrantTypes("client_credentials", "refresh_token")
-//                .scopes("server")
+                .authorizedGrantTypes("refresh_token", "password", "authorization_code")
+                .scopes("ui")
+                .autoApprove(true);
     }
 
     @Override

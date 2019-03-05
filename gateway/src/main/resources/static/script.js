@@ -7,19 +7,41 @@ function addUser() {
 	var password = document.getElementById('user_password').value;
 
 	$.ajax({
-		url: 'users/signup',
+		url: 'users/oauth/token',
 		datatype: 'json',
-		type: "POST",
+		type: 'POST',
 		async: false,
 		headers: {'Authorization': 'Basic YnJvd3Nlcjo='},
 		// headers: {'Authorization': 'Basic ' + btoa("browser:")},
-		contentType: "application/json",
-		data: JSON.stringify({
+		data: {
+			scope: 'ui',
 			username: username,
-			password: password
-		}),
+			password: "changeit",
+			grant_type: 'password'
+		},
 		success: function (data) {
-			log("OK: " + data.name);
+			var token = data.access_token;
+			log("OK: " + token);
+			localStorage.setItem('token', token);
+
+			$.ajax({
+				url: 'users/signup',
+				datatype: 'json',
+				type: "POST",
+				async: false,
+				headers: {'Authorization': 'Bearer ' + token},
+				contentType: "application/json",
+				data: JSON.stringify({
+					username: username,
+					password: password
+				}),
+				success: function (data) {
+					log("OK: " + data.name);
+				},
+				error: function (xhr, ajaxOptions, thrownError) {
+					log("ERROR: " + xhr.responseText);
+				}
+			});
 		},
 		error: function (xhr, ajaxOptions, thrownError) {
 			log("ERROR: " + xhr.responseText);
